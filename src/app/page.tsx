@@ -70,7 +70,7 @@ export default function Home() {
               <EpisodeForm onAddEpisode={addEpisode}/>
             </div>
           </div>
-          <h2>Favorites</h2>
+          <h2>Favoritos</h2>
           <FavoritesList 
             favorites={favorites}
             onRemoveFromFavorites={removeFromFavorites}
