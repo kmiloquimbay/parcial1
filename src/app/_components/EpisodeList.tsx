@@ -17,7 +17,7 @@ export default function EpisodeList({episodios, favorites, onAddToFavorites}: Pr
         const isAlreadyFavorite = favorites.find(fav => fav.id === episode.id);
         if (isAlreadyFavorite) {
             toast(`Episodio ${episode.id} ya está en favoritos!`);
-        } else {
+        } else { 
             onAddToFavorites(episode);
             toast(`Episodio ${episode.id} marcado como favorito!`);
         }
