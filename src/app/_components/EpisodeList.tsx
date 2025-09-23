@@ -30,10 +30,9 @@ export default function EpisodeList({episodios, favorites, onAddToFavorites}: Pr
                     <EpisodeItem episode={ep} />
                     <button 
                         onClick={() => markAsFavorite(ep)} 
-                        className={'bg-' + (favorites.find(fav => fav.id === ep.id) ? 'gray-500 text-white' : 'yellow-500') + ' rounded p-1'}
-                        disabled={favorites.find(fav => fav.id === ep.id) !== undefined}
+                        className='bg-yellow-500 rounded p-1'
                     >
-                        {favorites.find(fav => fav.id === ep.id) ? 'Ya es favorito' : 'Marcar como favorito'}
+                        Marcar como favorito
                     </button>
                 </div>
             ))}
