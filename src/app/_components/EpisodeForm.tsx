@@ -62,7 +62,7 @@ export default function EpisodeForm({ onAddEpisode }: Props) {
             <label>ID Personajes (separados por coma):</label>
             <input {...register('characters')} className='border ml-2 mr-2' />
             {errors.characters && <p>{errors.characters.message}</p>}
-        </div>
+        </div> 
         <button type="submit" className='bg-blue-500 rounded p-1'>Crear Episodio</button>
         </form>
     </div>
