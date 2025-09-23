@@ -29,6 +29,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (favorites.length > 0) {
+      setEpisodes(prev => prev.filter(ep => !favorites.find(fav => fav.id === ep.id)));
+    }
+  }, [favorites]);
+
+  useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
