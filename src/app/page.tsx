@@ -35,13 +35,15 @@ export default function Home() {
   const addToFavorites = (episode: Episodio) => {
 
     if (!favorites.find(fav => fav.id === episode.id)) {
+      setEpisodes(episodes.filter(ep => ep.id !== episode.id));
       setFavorites([...favorites, episode]);
     }
   };
 
-  const removeFromFavorites = (episodeId: number) => {
+    const removeFromFavorites = (episodeId: number) => {
+    const episode = favorites.find(fav => fav.id === episodeId);
     setFavorites(favorites.filter(fav => fav.id !== episodeId));
-    toast(`Episodio ${episodeId} removido de favoritos!`)
+    toast(`Episodio "${episode?.name}" removido de favoritos!`)
   };
 
   const addEpisode = (episode: Episodio) => {

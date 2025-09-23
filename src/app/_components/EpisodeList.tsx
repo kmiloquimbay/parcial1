@@ -15,10 +15,10 @@ export default function EpisodeList({episodios, favorites, onAddToFavorites}: Pr
     const markAsFavorite = (episode: Episodio) => {
         const isAlreadyFavorite = favorites.find(fav => fav.id === episode.id);
         if (isAlreadyFavorite) {
-            toast(`Episodio ${episode.id} ya está en favoritos!`);
+            toast(`Episodio "${episode.name}" ya está en favoritos!`);
         } else { 
             onAddToFavorites(episode);
-            toast(`Episodio ${episode.id} marcado como favorito!`);
+            toast(`Episodio "${episode.name}" marcado como favorito!`);
         }
     }
 
@@ -30,7 +30,7 @@ export default function EpisodeList({episodios, favorites, onAddToFavorites}: Pr
                     <EpisodeItem episode={ep} />
                     <button 
                         onClick={() => markAsFavorite(ep)} 
-                        className={'bg-' + (favorites.find(fav => fav.id === ep.id) ? 'red-500' : 'yellow-500') + ' rounded p-1'}
+                        className={'bg-' + (favorites.find(fav => fav.id === ep.id) ? 'gray-500 text-white' : 'yellow-500') + ' rounded p-1'}
                         disabled={favorites.find(fav => fav.id === ep.id) !== undefined}
                     >
                         {favorites.find(fav => fav.id === ep.id) ? 'Ya es favorito' : 'Marcar como favorito'}

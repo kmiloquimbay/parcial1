@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Episodio from '../model/Episodio';
+import { toast, Toaster } from 'sonner';
 
 const episodeSchema = z.object({
   name: z.string().min(1, 'El nombre es requerido'),
@@ -20,10 +21,10 @@ export default function EpisodeForm({ onAddEpisode }: Props) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<EpisodeFormData>({
+    formState: { errors, isValid },
+    reset  } = useForm<EpisodeFormData>({
     resolver: zodResolver(episodeSchema),
+    mode: 'onChange',
   });
 
   const onSubmit = (data: EpisodeFormData) => {
@@ -34,16 +35,18 @@ export default function EpisodeForm({ onAddEpisode }: Props) {
       characters: data.characters.split('-').map(s => "https://rickandmortyapi.com/api/character/" + s.trim()),
     };
     onAddEpisode(newEpisode);
+    toast(`Episodio "${newEpisode.name}" creado!`);
     reset();
   };
 
   return (
     <div>
+        <Toaster />
         <form onSubmit={handleSubmit(onSubmit)}>
         <div>
             <label>Nombre del episodio:</label>
             <input {...register('name')} className='border ml-2 mr-2' />
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && <p className='text-red-500'>* {errors.name.message}</p>}
         </div>
         <div>
             <label>ID Personajes (separados por guión):</label>
@@ -54,9 +57,9 @@ export default function EpisodeForm({ onAddEpisode }: Props) {
                     message: 'Formato inválido. Use guiones para separar los IDs, por ejemplo: 1-2-3-4-5'
                 }
             })} className='border ml-2 mr-2' />
-            {errors.characters && <p>{errors.characters.message}</p>}
+            {errors.characters && <p className='text-red-500'>* {errors.characters.message}</p>}
         </div> 
-        <button type="submit" className='bg-blue-500 rounded p-1'>Crear Episodio</button>
+        <button type="submit" className={isValid ? 'bg-blue-500 rounded p-1' : 'bg-blue-100 text-gray-100 rounded p-1'} disabled={!isValid}>Crear Episodio</button>
         </form>
     </div>
   );
