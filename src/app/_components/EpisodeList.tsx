@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Episodio from "../model/Episodio"
 import EpisodeItem from "./EpisodeItem";
 import { Toaster } from "@/components/ui/sonner";
@@ -31,7 +30,7 @@ export default function EpisodeList({episodios, favorites, onAddToFavorites}: Pr
                     <EpisodeItem episode={ep} />
                     <button 
                         onClick={() => markAsFavorite(ep)} 
-                        className="bg-yellow-500 rounded p-1"
+                        className={'bg-' + (favorites.find(fav => fav.id === ep.id) ? 'red-500' : 'yellow-500') + ' rounded p-1'}
                         disabled={favorites.find(fav => fav.id === ep.id) !== undefined}
                     >
                         {favorites.find(fav => fav.id === ep.id) ? 'Ya es favorito' : 'Marcar como favorito'}
