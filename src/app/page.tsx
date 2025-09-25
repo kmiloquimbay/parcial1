@@ -6,6 +6,7 @@ import EpisodeList from "./_components/EpisodeList";
 import FavoritesList from "./_components/FavoritesList";
 import EpisodeForm from "./_components/EpisodeForm";
 import { toast, Toaster } from "sonner";
+import { set } from "zod";
 
 export default function Home() {
 
@@ -49,6 +50,7 @@ export default function Home() {
     const removeFromFavorites = (episodeId: number) => {
     const episode = favorites.find(fav => fav.id === episodeId);
     setFavorites(favorites.filter(fav => fav.id !== episodeId));
+    setEpisodes([...episodes, episode!] );
     toast(`Episodio "${episode?.name}" removido de favoritos!`)
   };
 
